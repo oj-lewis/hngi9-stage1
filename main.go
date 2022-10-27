@@ -1,8 +1,9 @@
 package main
 
 import (
-	"net/http"
 	"encoding/json"
+	"log"
+	"net/http"
 )
 
 func main() {
@@ -19,5 +20,7 @@ func main() {
 		json.NewEncoder(res).Encode(resp)
 	})
 
-	http.ListenAndServe(":8080", r)
+	if err := http.ListenAndServe(":8080", r); err != nil {
+		log.Fatal(err)
+	}
 }
